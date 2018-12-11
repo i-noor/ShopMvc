@@ -195,14 +195,55 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicationsController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Filters\MyAuthAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812101208285_InitialCreate.cs" />
+    <Compile Include="Migrations\201812101208285_InitialCreate.Designer.cs">
+      <DependentUpon>201812101208285_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812101438319_MigrateDB.cs" />
+    <Compile Include="Migrations\201812101438319_MigrateDB.Designer.cs">
+      <DependentUpon>201812101438319_MigrateDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812101509304_MigrateDB2.cs" />
+    <Compile Include="Migrations\201812101509304_MigrateDB2.Designer.cs">
+      <DependentUpon>201812101509304_MigrateDB2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812110039220_MigrateDB3.cs" />
+    <Compile Include="Migrations\201812110039220_MigrateDB3.Designer.cs">
+      <DependentUpon>201812110039220_MigrateDB3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812110717163_MigrateDB31.cs" />
+    <Compile Include="Migrations\201812110717163_MigrateDB31.Designer.cs">
+      <DependentUpon>201812110717163_MigrateDB31.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812111031081_MigrateDB32.cs" />
+    <Compile Include="Migrations\201812111031081_MigrateDB32.Designer.cs">
+      <DependentUpon>201812111031081_MigrateDB32.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Abstract\IProductsRepository.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AppDbInitializer.cs" />
+    <Compile Include="Models\Application.cs" />
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductContext.cs" />
+    <Compile Include="Models\ProductDbInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -215,6 +256,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\1.jpeg" />
+    <Content Include="img\2.png" />
+    <Content Include="img\3.jpeg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -231,7 +275,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -265,9 +311,26 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Home\Buy.cshtml" />
+    <Content Include="Views\Applications\Create.cshtml" />
+    <Content Include="Views\Applications\Delete.cshtml" />
+    <Content Include="Views\Applications\Details.cshtml" />
+    <Content Include="Views\Applications\Edit.cshtml" />
+    <Content Include="Views\Applications\Index.cshtml" />
+    <Content Include="Views\Carts\Create.cshtml" />
+    <Content Include="Views\Carts\Delete.cshtml" />
+    <Content Include="Views\Carts\Details.cshtml" />
+    <Content Include="Views\Carts\Edit.cshtml" />
+    <Content Include="Views\Carts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -281,6 +344,26 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201812101208285_InitialCreate.resx">
+      <DependentUpon>201812101208285_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812101438319_MigrateDB.resx">
+      <DependentUpon>201812101438319_MigrateDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812101509304_MigrateDB2.resx">
+      <DependentUpon>201812101509304_MigrateDB2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812110039220_MigrateDB3.resx">
+      <DependentUpon>201812110039220_MigrateDB3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812110717163_MigrateDB31.resx">
+      <DependentUpon>201812110717163_MigrateDB31.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812111031081_MigrateDB32.resx">
+      <DependentUpon>201812111031081_MigrateDB32.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

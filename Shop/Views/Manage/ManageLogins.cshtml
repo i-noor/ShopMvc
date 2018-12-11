@@ -9,16 +9,7 @@
 <p class="text-success">@ViewBag.StatusMessage</p>
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
-    if (loginProviders.Count() == 0) {
-        <div>
-            <p>
-                Внешние службы проверки подлинности не настроены. Подробности о настройке входа через внешние службы для этого приложения ASP.NET
-                см. в <a href="https://go.microsoft.com/fwlink/?LinkId=313242">этой статье</a>.
-            </p>
-        </div>
-    }
-    else
-    {
+    
         if (Model.CurrentLogins.Count > 0)
         {
             <h4>Зарегистрированные имена входа</h4>
@@ -66,5 +57,5 @@
                 </div>
             }
         }
-    }
+    
 }
